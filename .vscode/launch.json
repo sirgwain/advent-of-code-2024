@@ -13,15 +13,13 @@
             "args": [
                 "run",
                 "--day",
-                "10",
+                "11",
                 "--part",
                 "1",
                 "--input",
-                "inputs/day10test.txt",
-                "--visualization",
-                "--redacted",
+                "inputs/day11test.txt",
             ],
-            "console": "integratedTerminal"
+            // "console": "integratedTerminal"
         },
     ]
 }
