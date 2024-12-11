@@ -18,7 +18,6 @@
 vendor/
 tmp/
 inputs/
-tapes/
 
 # Go workspace file
 go.work
