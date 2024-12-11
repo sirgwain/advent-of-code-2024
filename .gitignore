@@ -15,7 +15,10 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
+tmp/
+inputs/
+tapes/
 
 # Go workspace file
 go.work
@@ -23,3 +26,6 @@ go.work.sum
 
 # env file
 .env
+
+# igore the binary
+advent-of-code-2024
