@@ -60,7 +60,8 @@ func (d *Day11) readInput(filename string) ([]int, error) {
 }
 
 func (d *Day11) part1(input []int) error {
-	numStones := d.blinkStones(input, 25)
+	// numStones := d.blinkStones(input, 25)
+	numStones := d.blinkStonesShantz(input, 25)
 
 	fmt.Printf("\nTotal Stones: %s\n", solutionStyle.Render(strconv.Itoa(numStones)))
 	return nil
@@ -80,6 +81,42 @@ func (d *Day11) blinkStones(stones []int, times int) int {
 
 	for _, stone := range stones {
 		numStones += d.blink(stone, times)
+	}
+	return numStones
+}
+
+func (d *Day11) blinkStonesShantz(input []int, times int) int {
+	// keep a map of stones and their counts
+	// blink all stones of the same id as a group
+	// from shantz1. I wanted to try this idea to see how it compared to my original
+	stones := make(map[int]int)
+	for _, stone := range input {
+		stones[stone]++
+	}
+
+	for range times {
+		// make a new map for this blink round
+		newStones := make(map[int]int, len(stones))
+		// iterate over every stone in the previous group and run the rules
+		for stone, count := range stones {
+
+			stone1, stone2 := d.runRules(stone)
+			// the first stone changed number, so put it's count in the new stones map
+			newStones[stone1] += count
+
+			if stone2 != -1 {
+				// stone2 is a dupe of an old stone batch with a new number
+				newStones[stone2] += count
+			}
+		}
+		// reset our stones map for the next loop
+		stones = newStones
+	}
+
+	// count all the stones after all the blinks
+	numStones := 0
+	for _, count := range stones {
+		numStones += count
 	}
 	return numStones
 }
