@@ -27,6 +27,7 @@ type Model struct {
 	viewport      viewport.Model
 	title         string
 	viewportLines []string
+	minWidth      int
 	windowWidth   int
 	windowHeight  int
 }
@@ -53,6 +54,11 @@ func (m Model) WithViewport(lines []string) Model {
 	return m
 }
 
+func (m Model) WithMinWidth(minWidth int) Model {
+	m.minWidth = minWidth
+	return m
+}
+
 func NewViewportProgram(initialModel Model) *tea.Program {
 	return tea.NewProgram(
 		initialModel,
@@ -67,6 +73,28 @@ func UpdateViewport(content string, width int) tea.Msg {
 
 func UpdateViewportLine(lineNum int, line string) tea.Msg {
 	return updateViewportLine{lineNum: lineNum, line: line}
+}
+
+func minInt(nums ...int) int {
+	result := math.MaxInt
+	for _, value := range nums {
+		if value < result {
+			result = value
+		}
+	}
+
+	return result
+}
+
+func maxInt(nums ...int) int {
+	result := math.MinInt
+	for _, value := range nums {
+		if value > result {
+			result = value
+		}
+	}
+
+	return result
 }
 
 func (m Model) headerView() string {
@@ -110,6 +138,9 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			// quickly, though asynchronously, which is why we wait for them
 			// here.
 			m.windowWidth, m.windowHeight = msg.Width, msg.Height
+			if m.minWidth == 0 {
+				m.minWidth = m.windowWidth
+			}
 			m.viewport = viewport.New(msg.Width, msg.Height-verticalMarginHeight)
 			m.viewport.YPosition = headerHeight
 			m.ready = true
@@ -130,10 +161,10 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.viewportLines = strings.Split(msg.content, "\n")
 		if m.ready {
 			if msg.width != 0 {
-				m.viewport.Width = int(math.Min(float64(m.windowWidth), float64(msg.width))) + viewportStyle.GetHorizontalMargins() // add two for the margin
+				m.viewport.Width = maxInt(m.minWidth, minInt(m.windowWidth, msg.width)) + viewportStyle.GetHorizontalMargins() // add two for the margin
 			}
 			if msg.height != 0 {
-				m.viewport.Height = int(math.Min(float64(m.windowHeight), float64(msg.height)))
+				m.viewport.Height = maxInt(m.minWidth, minInt(m.windowHeight, msg.height))
 			}
 			m.viewport.SetContent(msg.content)
 		}

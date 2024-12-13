@@ -52,6 +52,8 @@ func newRunCmd() *cobra.Command {
 				runner = &advent.Day10{}
 			case 11:
 				runner = &advent.Day11{}
+			case 12:
+				runner = &advent.Day12{}
 			}
 
 			if runner == nil {

@@ -15,6 +15,14 @@ func duplicate2DSlice[T any](original [][]T) [][]T {
 	return duplicate
 }
 
+func make2DSlice[T uint](width, height int) [][]T {
+	s := make([][]T, height)
+	for i := range height {
+		s[i] = make([]T, width)
+	}
+	return s
+}
+
 // thanks chatgpt!
 func removeIndex(original []int, index int) []int {
 	if index < 0 || index >= len(original) {

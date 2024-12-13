@@ -2,10 +2,10 @@ package cmd
 
 import (
 	"fmt"
+	"log/slog"
 	"os"
 	"path/filepath"
 
-	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 )
 
@@ -17,6 +17,7 @@ func logPreRun(cmd *cobra.Command, args []string) error {
 		if err := os.MkdirAll(filepath.Dir(logFile), 0755); err != nil {
 			return fmt.Errorf("failed to create log dir %s %w", filepath.Base(logFile), err)
 		}
+		os.Remove(logFile)
 		logFileWriter, err := os.OpenFile(
 			logFile,
 			os.O_CREATE|os.O_WRONLY,
@@ -25,7 +26,9 @@ func logPreRun(cmd *cobra.Command, args []string) error {
 		if err != nil {
 			return fmt.Errorf("failed to create log file %s %w", logFile, err)
 		}
-		log.Logger = log.Output(logFileWriter)
+		logger := slog.New(slog.NewTextHandler(logFileWriter, &slog.HandlerOptions{Level: slog.LevelDebug}))
+		slog.SetDefault(logger)
+		slog.Info("logging enabled")
 	}
 	return nil
 }

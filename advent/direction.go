@@ -1,5 +1,7 @@
 package advent
 
+import "fmt"
+
 // clockwise directions
 type direction int
 
@@ -19,6 +21,27 @@ var cardinalDirections = []direction{
 	directionRight,
 	directionDown,
 	directionLeft,
+}
+
+const (
+	sideUp    = 0x01
+	sideRight = 0x02
+	sideDown  = 0x04
+	sideLeft  = 0x08
+)
+
+func removeSide(sides uint, dir direction) uint {
+	switch dir {
+	case directionUp:
+		return (sides ^ sideUp)
+	case directionRight:
+		return (sides ^ sideRight)
+	case directionDown:
+		return (sides ^ sideDown)
+	case directionLeft:
+		return (sides ^ sideLeft)
+	}
+	panic(fmt.Sprintf("can't remove side for direction %v", dir))
 }
 
 // turn 90 degrees right

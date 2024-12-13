@@ -5,7 +5,7 @@ func validPosition(p position, width, height int) bool {
 }
 
 // getBoardValue returns a rune/int/bool at x,y in the input or the empty value if out of bounds
-func getBoardValue[T int | rune | bool](x, y int, board [][]T) T {
+func getBoardValue[T int | uint | rune | bool](x, y int, board [][]T) T {
 	var zero T
 	if y < 0 || y >= len(board) {
 		return zero
@@ -17,7 +17,7 @@ func getBoardValue[T int | rune | bool](x, y int, board [][]T) T {
 }
 
 // find 
-func findValue[T int | rune | bool](board [][]T, c T) (x, y int) {
+func findValue[T int | uint | rune | bool](board [][]T, c T) (x, y int) {
 	for y := 0; y < len(board); y++ {
 		for x := 0; x < len(board[y]); x++ {
 			if board[y][x] == c {
