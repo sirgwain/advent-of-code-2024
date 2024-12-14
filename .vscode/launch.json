@@ -13,13 +13,11 @@
             "args": [
                 "run",
                 "--day",
-                "12",
+                "14",
                 "--part",
                 "2",
                 "--input",
-                "inputs/day12test8.txt",
-                "-v",
-                "--delay", "100"
+                "inputs/day14.txt",
             ],
             "console": "integratedTerminal"
         },

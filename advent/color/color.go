@@ -33,6 +33,7 @@ const (
 	DarkGreen   = lipgloss.Color("22")
 	OliveGreen  = lipgloss.Color("28")
 	DarkCyan    = lipgloss.Color("30")
+	MediumGreen = lipgloss.Color("34")
 	Teal        = lipgloss.Color("37")
 	NavyBlue    = lipgloss.Color("38")
 	SlateBlue   = lipgloss.Color("54")

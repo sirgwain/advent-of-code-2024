@@ -1,6 +1,9 @@
 package advent
 
-import "github.com/charmbracelet/lipgloss"
+import (
+	"github.com/charmbracelet/lipgloss"
+	"github.com/sirgwain/advent-of-code-2024/advent/color"
+)
 
 var (
 	// the style of the solution text
@@ -21,4 +24,8 @@ var (
 	antennaStyle             = lipgloss.NewStyle().Foreground(lipgloss.Color("82"))
 	antennaWithAntinodeStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("87"))
 	antinodeStyle            = lipgloss.NewStyle().Foreground(lipgloss.Color("202"))
+
+	// day14
+	robotGreenStyle = lipgloss.NewStyle().Foreground(color.BrightRed)
+	robotRedStyle   = lipgloss.NewStyle().Foreground(color.MediumGreen)
 )
