@@ -59,3 +59,11 @@ func readInputAsIntBoard(filename string) ([][]int, error) {
 
 	return input, nil
 }
+
+func mustAtoi[T string | []byte](s T) int {
+	i, err := strconv.Atoi(string(s))
+	if err != nil {
+		panic(err)
+	}
+	return i
+}
