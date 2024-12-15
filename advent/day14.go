@@ -20,7 +20,7 @@ type Day14 struct {
 
 type day14Input = day14Board
 
-type robot struct {
+type day14robot struct {
 	position
 	velocity position
 }
@@ -28,7 +28,7 @@ type robot struct {
 type day14Board struct {
 	width  int
 	height int
-	robots []robot
+	robots []day14robot
 
 	seconds       int
 	confidence    int
@@ -93,7 +93,7 @@ func (d *Day14) readInput(filename string) (day14Input, error) {
 			continue
 		}
 		match := reRobot.FindSubmatch(line)
-		r := robot{
+		r := day14robot{
 			position: position{mustAtoi(match[1]), mustAtoi(match[2])},
 			velocity: position{mustAtoi(match[3]), mustAtoi(match[4])},
 		}
@@ -156,7 +156,7 @@ func (d *Day14) part2(input day14Input) error {
 
 func (d *Day14) part2Visual(input day14Input) error {
 	// create a bubbletea program
-	p := tui.NewViewportProgram(tui.NewModel("Day 10"))
+	p := tui.NewViewportProgram(tui.NewModel("Day 14"))
 
 	board := input
 	board.midUpperLeft, board.midLowerRight = board.treeArea()

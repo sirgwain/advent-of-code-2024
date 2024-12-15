@@ -28,4 +28,9 @@ var (
 	// day14
 	robotGreenStyle = lipgloss.NewStyle().Foreground(color.BrightRed)
 	robotRedStyle   = lipgloss.NewStyle().Foreground(color.MediumGreen)
+
+	// day15
+	robotStyle = lipgloss.NewStyle().Foreground(color.BrightCyan)
+	wallStyle  = lipgloss.NewStyle().Foreground(lipgloss.Color("202"))
+	boxStyle   = lipgloss.NewStyle().Foreground(lipgloss.Color("82"))
 )

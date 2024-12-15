@@ -19,6 +19,9 @@ To make a tape, build and execute the tape file with the `vhs` utility.
 make && vhs tapes/day8.tape
 ```
 
+### Day 15
+![day-15-visualization](tapes/day15.gif)
+
 ### Day 10
 ![day-10-visualization](tapes/day10.gif)
 
